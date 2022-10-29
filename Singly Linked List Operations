@@ -1,0 +1,165 @@
+#include<iostream>
+#include<conio.h>
+#include<stdlib.h>
+using namespace std;
+struct Node 
+{
+    int data;
+    struct Node* next;
+};
+void traversal(struct Node* ptr)
+{
+    while(ptr!=NULL)
+    {
+        cout<<"Element is:"<<ptr->data<<endl;
+        ptr=ptr->next;
+
+    }
+}
+
+struct Node* insertatstart(struct Node* head, int data)    //Insertion at Beginning
+{
+struct Node* ptr= (struct Node*)malloc(sizeof(struct Node));
+ptr->data=data;
+ptr->next=head;
+return ptr;
+}
+
+struct Node* insertinbetween(struct Node* head, int data, int index)  //Insertion in Between
+{
+    struct Node* ptr= (struct Node*)malloc(sizeof(struct Node));
+    ptr->data=data;
+    struct Node* q=head;
+    int i=0;
+    while(i!=index-1)
+    {
+     ptr->next=q->next;
+     q->next=ptr;
+     i++;
+     return head;
+    }
+}
+
+struct Node* insertatlast(struct Node* head, int data)     //Insertion at last
+{
+    struct Node* ptr=(struct Node*)malloc(sizeof(struct Node));
+    ptr->data=data;
+    struct Node* q=head;
+    while(q->next!=NULL)
+    {
+     q=q->next;
+    }
+    q->next=ptr;
+    ptr->next=NULL;
+    return head;
+}
+
+struct Node* insertafter(struct Node* head, struct Node* prevnode, int data)  //Insertion after a given node
+{
+struct Node* ptr= (struct Node*)malloc(sizeof(struct Node));
+ptr->data=data;
+ptr->next=prevnode->next;
+prevnode->next=ptr;
+return head;
+}
+
+//Deletion in linked list
+struct Node* deletefirst( struct Node* head)     //Deleting first Node
+{
+    struct Node* ptr=head;
+    head=head->next;
+    free(ptr);
+    return head;
+    }
+
+struct Node* deletebetween(struct Node* head, int index)   //Deleting in between
+{
+    
+    int i=0;
+    struct Node* p=head;
+    struct Node* q=head->next;
+    while(i!=index-1)
+    {
+     p=p->next;
+     q=q->next;
+     i++;
+    }
+    p->next=q->next;
+    free(q);
+    return head;
+}
+
+struct Node* deletelast(struct Node* head)   //Deleting the last node
+{
+    struct Node* p=head;
+    struct Node* q=head->next;
+    while(q->next!=NULL)
+    {
+        p=p->next;
+        q=q->next;
+    }
+    p->next=q->next;
+    p->next=NULL;
+    free(q);
+    return head;
+}  
+
+struct Node* deletegiven(struct Node* head, int value)      //Delete with given value
+{
+    struct Node* p=head;
+    struct Node* q= head->next;
+    while(q->data!=value && q->next!=NULL)
+    {
+     p=p->next;
+     q=q->next;
+    }
+    if(q->data==value)
+    {
+        p->next=q->next;
+        free (q);
+    }
+    else{
+        cout<<"data not found";
+    }
+    return head;
+}
+
+
+
+int main()
+{
+    
+    struct Node* head;
+    struct Node* second;
+    struct Node* third;
+    struct Node* forth;
+    head = (struct Node*)malloc(sizeof(struct Node));
+    second = (struct Node*)malloc(sizeof(struct Node));
+    third = (struct Node*)malloc(sizeof(struct Node));
+    forth = (struct Node*)malloc(sizeof(struct Node));
+    head->data= 2;
+    head->next=second;
+    second->data=4;
+    second->next=third;
+    third->data=6;
+    third->next=forth;
+    forth->data=8;
+    forth->next=NULL;
+    cout<<"Linked list before insertion\n";
+    traversal(head);
+    cout<<"Linked list after insertion\n";
+    head= insertatstart(head,10);
+    head= insertinbetween(head,50,4);
+    head= insertatlast(head,100);
+    head= insertafter(head,third,456);
+    traversal(head);
+    cout<<"List after Deletion\n";
+    head=deletebetween(head,3);
+    head= deletefirst(head);
+    head=deletelast(head);
+    head=deletegiven(head,8);
+    traversal(head);
+    return 0;
+    getch();
+
+}
