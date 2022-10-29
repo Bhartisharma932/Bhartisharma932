@@ -1,0 +1,6 @@
+- 👋 Hi, I’m @Bhartisharma932
+- 👀 I’m interested in core languages C, C++, MySQL, Java, Python.
+- 🌱 I’m currently learning Data Structures and Machine Learning.
+- 💞️ I’m looking to collaborate on Machine learning Projects.
+- 📫 You can reach me on my Linkedin profile.
+- https://www.linkedin.com/in/bharti-sharma-b05412214
